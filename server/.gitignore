@@ -1,0 +1,9 @@
+node_modules/
+.env
+uploads/gallery/*
+uploads/parts/*
+uploads/pdfs/*
+!uploads/gallery/.gitkeep
+!uploads/parts/.gitkeep
+!uploads/pdfs/.gitkeep
+*.log

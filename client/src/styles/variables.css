@@ -1,0 +1,123 @@
+/* ============================================================
+   variables.css — Design Tokens
+   All colours, spacing, typography, and shadow values are
+   defined here as CSS custom properties. This ensures a
+   consistent visual language across every component.
+   ============================================================ */
+
+:root {
+  /* ── Brand colours ─────────────────────────────────────── */
+  --color-primary:        #c0392b;   /* Mbevha red             */
+  --color-primary-dark:   #96281b;   /* Hover / active state   */
+  --color-primary-light:  #e74c3c;   /* Lighter accent         */
+  --color-secondary:      #1a1a2e;   /* Deep navy              */
+  --color-secondary-light:#2d2d44;   /* Sidebar background     */
+  --color-accent:         #f39c12;   /* Gold highlight         */
+
+  /* ── Neutral greys ─────────────────────────────────────── */
+  --color-white:          #ffffff;
+  --color-grey-50:        #f8f9fa;
+  --color-grey-100:       #f1f3f5;
+  --color-grey-200:       #e9ecef;
+  --color-grey-300:       #dee2e6;
+  --color-grey-400:       #ced4da;
+  --color-grey-500:       #adb5bd;
+  --color-grey-600:       #6c757d;
+  --color-grey-700:       #495057;
+  --color-grey-800:       #343a40;
+  --color-grey-900:       #212529;
+  --color-black:          #0a0a0a;
+
+  /* ── Semantic colours ──────────────────────────────────── */
+  --color-success:        #27ae60;
+  --color-success-light:  #d4edda;
+  --color-danger:         #c0392b;
+  --color-danger-light:   #f8d7da;
+  --color-warning:        #f39c12;
+  --color-warning-light:  #fff3cd;
+  --color-info:           #2980b9;
+  --color-info-light:     #d1ecf1;
+
+  /* ── Text colours ──────────────────────────────────────── */
+  --text-primary:         var(--color-grey-900);
+  --text-secondary:       var(--color-grey-600);
+  --text-muted:           var(--color-grey-500);
+  --text-inverse:         var(--color-white);
+  --text-link:            var(--color-primary);
+
+  /* ── Background colours ────────────────────────────────── */
+  --bg-body:              var(--color-grey-50);
+  --bg-card:              var(--color-white);
+  --bg-sidebar:           var(--color-secondary);
+  --bg-sidebar-hover:     var(--color-secondary-light);
+  --bg-header:            var(--color-white);
+
+  /* ── Border ────────────────────────────────────────────── */
+  --border-color:         var(--color-grey-200);
+  --border-color-focus:   var(--color-primary);
+  --border-radius-sm:     4px;
+  --border-radius:        8px;
+  --border-radius-lg:     12px;
+  --border-radius-xl:     16px;
+  --border-radius-full:   9999px;
+
+  /* ── Spacing scale ─────────────────────────────────────── */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* ── Typography ────────────────────────────────────────── */
+  --font-family-base:   'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family-mono:   'Consolas', 'Courier New', monospace;
+
+  --font-size-xs:   12px;
+  --font-size-sm:   14px;
+  --font-size-base: 16px;
+  --font-size-lg:   18px;
+  --font-size-xl:   20px;
+  --font-size-2xl:  24px;
+  --font-size-3xl:  30px;
+  --font-size-4xl:  36px;
+  --font-size-5xl:  48px;
+
+  --font-weight-normal:   400;
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+
+  --line-height-tight:  1.25;
+  --line-height-normal: 1.5;
+  --line-height-loose:  1.75;
+
+  /* ── Shadows ───────────────────────────────────────────── */
+  --shadow-sm:   0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md:   0 4px 12px rgba(0, 0, 0, 0.10);
+  --shadow-lg:   0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-xl:   0 16px 48px rgba(0, 0, 0, 0.15);
+
+  /* ── Transitions ───────────────────────────────────────── */
+  --transition-fast:   150ms ease;
+  --transition-base:   250ms ease;
+  --transition-slow:   400ms ease;
+
+  /* ── Layout ────────────────────────────────────────────── */
+  --sidebar-width:       260px;
+  --header-height:       64px;
+  --container-max-width: 1280px;
+
+  /* ── Z-index scale ─────────────────────────────────────── */
+  --z-dropdown:   100;
+  --z-sticky:     200;
+  --z-overlay:    300;
+  --z-modal:      400;
+  --z-toast:      500;
+}

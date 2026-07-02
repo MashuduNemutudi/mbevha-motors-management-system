@@ -1,0 +1,27 @@
+/* ============================================================
+   responsive.css — Breakpoint overrides
+   ============================================================ */
+
+/* Tablet: ≤ 1024px */
+@media (max-width: 1024px) {
+  .admin-main { margin-left: 0; }
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform var(--transition-base);
+  }
+  .sidebar--open { transform: translateX(0); }
+}
+
+/* Mobile: ≤ 768px */
+@media (max-width: 768px) {
+  .container { padding: 0 var(--space-4); }
+  .navbar__links { display: none; }
+  .page { padding: var(--space-4); }
+  .page-title { font-size: var(--font-size-2xl); }
+  .login-card { padding: var(--space-6); }
+}
+
+/* Small mobile: ≤ 480px */
+@media (max-width: 480px) {
+  .modal--md, .modal--lg { max-width: 100%; margin: var(--space-4); }
+}

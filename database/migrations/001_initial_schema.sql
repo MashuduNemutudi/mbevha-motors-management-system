@@ -1,0 +1,11 @@
+-- migrations/001_initial_schema.sql
+-- ─────────────────────────────────────────────────────────────
+-- Migration 001: Initial schema creation.
+-- This file is a record of the schema applied at project launch.
+-- The canonical schema is in /database/schema.sql.
+-- Future schema changes should be added as new numbered files:
+--   002_add_column.sql
+--   003_create_table.sql
+-- ─────────────────────────────────────────────────────────────
+-- Applied: 2026-06
+-- See: /database/schema.sql for the full schema.

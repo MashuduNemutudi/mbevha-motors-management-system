@@ -1,0 +1,34 @@
+# Node modules
+node_modules/
+
+# Environment files — NEVER commit these
+.env
+.env.local
+.env.production
+
+# Build output
+client/dist/
+client/.vite/
+
+# Uploaded files — stored on server disk, not in git
+server/uploads/gallery/*
+server/uploads/parts/*
+server/uploads/pdfs/*
+
+# Keep the folders tracked in git
+!server/uploads/gallery/.gitkeep
+!server/uploads/parts/.gitkeep
+!server/uploads/pdfs/.gitkeep
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/settings.json
+.idea/
+*.swp
+
+# Logs
+*.log
+npm-debug.log*
