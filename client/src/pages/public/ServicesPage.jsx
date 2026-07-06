@@ -175,6 +175,96 @@ const ServicesPage = () => (
       </div>
     </section>
 
+    {/* ── PRICE LIST ────────────────────────────────────── */}
+    <section className="section">
+      <div className="container">
+        <SectionTitle
+          overline="Price Guide"
+          heading="Our Service Price List"
+          sub="Below are our standard labour prices. Prices may vary depending on vehicle model and condition."
+          center
+        />
+
+        <div
+          style={{
+            background: "#fff",
+            borderRadius: "12px",
+            padding: "30px",
+            boxShadow: "0 5px 20px rgba(0,0,0,.08)",
+          }}
+        >
+          <h3 style={{ marginBottom: "20px" }}>Engine Services</h3>
+
+          <table className="price-table" style={{ width: "100%", marginBottom: "30px" }}>
+            <tbody>
+              <tr><td>Engine Overhaul (6/8 Cylinder)</td><td>R4,500</td></tr>
+              <tr><td>Engine Overhaul (BMW/Benz/Audi/VW 4 Cylinder)</td><td>R3,000</td></tr>
+              <tr><td>Engine Overhaul (Other 4 Cylinder)</td><td>R2,500</td></tr>
+              <tr><td>Cylinder Head Job (8 Cylinder)</td><td>R3,500</td></tr>
+              <tr><td>Cylinder Head Job (6 Cylinder)</td><td>R2,500</td></tr>
+              <tr><td>Cylinder Head Job (4 Cylinder)</td><td>R2,000</td></tr>
+              <tr><td>Gearbox Remove</td><td>R1,500</td></tr>
+              <tr><td>Engine Service (8/6 Cylinder)</td><td>R1,500</td></tr>
+              <tr><td>Engine Service (4 Cylinder)</td><td>R1,200</td></tr>
+              <tr><td>Oil Pump Remove</td><td>R800</td></tr>
+              <tr><td>Tappet Cover Remove</td><td>R400</td></tr>
+              <tr><td>Gearbox Oil Service</td><td>R1,500</td></tr>
+              <tr><td>Cooling System Service</td><td>R800</td></tr>
+              <tr><td>Propeller Shaft Service</td><td>R800</td></tr>
+              <tr><td>Clutch Cylinder Replacement</td><td>R600</td></tr>
+              <tr><td>Fuel System Service</td><td>R1,200</td></tr>
+              <tr><td>Fuel Pump Replacement</td><td>R800</td></tr>
+              <tr><td>Engine Conversion</td><td>R5,500</td></tr>
+              <tr><td>Engine Mounting Replacement</td><td>R600</td></tr>
+              <tr><td>Gearbox Mounting Replacement</td><td>R400</td></tr>
+            </tbody>
+          </table>
+
+          <h3 style={{ marginBottom: "20px" }}>Brakes & Suspension</h3>
+
+          <table className="price-table" style={{ width: "100%", marginBottom: "30px" }}>
+            <tbody>
+              <tr><td>Front Brake Pads Replacement</td><td>R600</td></tr>
+              <tr><td>Rear Brake Pads Replacement</td><td>R400</td></tr>
+              <tr><td>Brake Shoes Adjustment</td><td>R400</td></tr>
+              <tr><td>Brake Shoes Replacement</td><td>R600</td></tr>
+              <tr><td>Brake Cylinder Replacement / Service</td><td>R400</td></tr>
+              <tr><td>Hand Brake Service</td><td>R400</td></tr>
+              <tr><td>Brake Bleeding</td><td>R300</td></tr>
+              <tr><td>Front Shock Absorbers Replacement</td><td>R1,000</td></tr>
+              <tr><td>Rear Shock Absorbers Replacement</td><td>R800</td></tr>
+              <tr><td>Front Shocks Mounting</td><td>R800</td></tr>
+              <tr><td>Rear Shocks Mounting</td><td>R600</td></tr>
+            </tbody>
+          </table>
+
+          <h3 style={{ marginBottom: "20px" }}>Steering & Other Repairs</h3>
+
+          <table className="price-table" style={{ width: "100%" }}>
+            <tbody>
+              <tr><td>Front Stabilizer Links Replacement</td><td>R400</td></tr>
+              <tr><td>Rear Stabilizer Links Replacement</td><td>R400</td></tr>
+              <tr><td>Tyre Rod End Replacement</td><td>R400</td></tr>
+              <tr><td>Steering Rod Ends Replacement</td><td>R400</td></tr>
+              <tr><td>Inner CV Joint Replacement / Service</td><td>R600</td></tr>
+              <tr><td>Outer CV Joint Replacement / Service</td><td>R600</td></tr>
+              <tr><td>Wheel Bearing Replacement / Service</td><td>R400</td></tr>
+              <tr><td>Ball Joint Replacement</td><td>R400</td></tr>
+              <tr><td>Control Arm Replacement</td><td>R600</td></tr>
+              <tr><td>V-Arm Replacement</td><td>R800</td></tr>
+              <tr><td>Steering Rack Replacement</td><td>R1,500</td></tr>
+              <tr><td>Brake Disc Replacement</td><td>R400</td></tr>
+              <tr><td>Brake Drums Replacement</td><td>R600</td></tr>
+              <tr><td>Differential Replacement Fitting</td><td>R1,500</td></tr>
+              <tr><td>Thermostat</td><td>R1,200</td></tr>
+              <tr><td>Water Pump Service</td><td>R1,200</td></tr>
+              <tr><td>Brake Lining</td><td>R600</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     {/* ── CTA ─────────────────────────────────────────────── */}
     <section className="cta-banner">
       <div className="container cta-banner__content">
