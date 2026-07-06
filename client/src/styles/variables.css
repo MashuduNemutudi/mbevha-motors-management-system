@@ -1,123 +1,152 @@
 /* ============================================================
-   variables.css — Design Tokens
-   All colours, spacing, typography, and shadow values are
-   defined here as CSS custom properties. This ensures a
-   consistent visual language across every component.
+   variables.css — Design Tokens — Mbevha Motors
+   Brand identity: Charcoal grey + Bold red (from real photos)
    ============================================================ */
-
 :root {
   /* ── Brand colours ─────────────────────────────────────── */
-  --color-primary:        #c0392b;   /* Mbevha red             */
-  --color-primary-dark:   #96281b;   /* Hover / active state   */
-  --color-primary-light:  #e74c3c;   /* Lighter accent         */
-  --color-secondary:      #1a1a2e;   /* Deep navy              */
-  --color-secondary-light:#2d2d44;   /* Sidebar background     */
-  --color-accent:         #f39c12;   /* Gold highlight         */
+  --clr-red:           #CC1C1C;   /* Mbevha red — gate/pillars  */
+  --clr-red-dark:      #a81717;   /* Hover/pressed              */
+  --clr-red-light:     #e02020;   /* Light accent               */
+  --clr-red-ghost:     rgba(204,28,28,0.08);
+
+  --clr-charcoal:      #2c2c2c;   /* Wall colour from photos    */
+  --clr-dark:          #1a1a1a;   /* Near-black backgrounds     */
+  --clr-darker:        #111111;   /* Hero overlay / footer      */
+  --clr-grey-wall:     #4a4a5a;   /* Slate grey of building     */
 
   /* ── Neutral greys ─────────────────────────────────────── */
-  --color-white:          #ffffff;
-  --color-grey-50:        #f8f9fa;
-  --color-grey-100:       #f1f3f5;
-  --color-grey-200:       #e9ecef;
-  --color-grey-300:       #dee2e6;
-  --color-grey-400:       #ced4da;
-  --color-grey-500:       #adb5bd;
-  --color-grey-600:       #6c757d;
-  --color-grey-700:       #495057;
-  --color-grey-800:       #343a40;
-  --color-grey-900:       #212529;
-  --color-black:          #0a0a0a;
+  --clr-white:         #ffffff;
+  --clr-off-white:     #f8f8f8;
+  --clr-grey-50:       #F5F5F5;
+  --clr-grey-100:      #eeeeee;
+  --clr-grey-200:      #e0e0e0;
+  --clr-grey-300:      #cccccc;
+  --clr-grey-400:      #aaaaaa;
+  --clr-grey-500:      #888888;
+  --clr-grey-600:      #666666;
+  --clr-grey-700:      #444444;
+  --clr-grey-800:      #333333;
+  --clr-grey-900:      #222222;
 
-  /* ── Semantic colours ──────────────────────────────────── */
+  /* ── Semantic ───────────────────────────────────────────── */
+  --clr-success:       #27ae60;
+  --clr-success-light: #d4edda;
+  --clr-danger:        #CC1C1C;
+  --clr-danger-light:  #fde8e8;
+  --clr-warning:       #e67e22;
+  --clr-available:     #27ae60;
+  --clr-unavailable:   #CC1C1C;
+
+  /* ── Admin sidebar stays dark navy (unchanged) ──────────── */
+  --color-primary:        #CC1C1C;
+  --color-primary-dark:   #a81717;
+  --color-primary-light:  #e02020;
+  --color-secondary:      #1a1a2e;
+  --color-secondary-light:#2d2d44;
+  --color-accent:         #f39c12;
   --color-success:        #27ae60;
   --color-success-light:  #d4edda;
-  --color-danger:         #c0392b;
-  --color-danger-light:   #f8d7da;
+  --color-danger:         #CC1C1C;
+  --color-danger-light:   #fde8e8;
   --color-warning:        #f39c12;
   --color-warning-light:  #fff3cd;
-  --color-info:           #2980b9;
-  --color-info-light:     #d1ecf1;
+  --color-grey-200:       #e0e0e0;
+  --color-grey-500:       #888888;
+  --color-grey-600:       #666666;
+  --color-grey-700:       #444444;
+  --color-white:          #ffffff;
+  --bg-card:              #ffffff;
+  --bg-sidebar:           #1a1a2e;
+  --bg-sidebar-hover:     #2d2d44;
+  --bg-header:            #ffffff;
+  --bg-body:              #f5f5f5;
+  --text-primary:         #1a1a1a;
+  --text-secondary:       #444444;
+  --text-muted:           #888888;
+  --text-inverse:         #ffffff;
+  --text-link:            #CC1C1C;
+  --border-color:         #e0e0e0;
+  --border-color-focus:   #CC1C1C;
+  --sidebar-width:        260px;
+  --header-height:        72px;
 
-  /* ── Text colours ──────────────────────────────────────── */
-  --text-primary:         var(--color-grey-900);
-  --text-secondary:       var(--color-grey-600);
-  --text-muted:           var(--color-grey-500);
-  --text-inverse:         var(--color-white);
-  --text-link:            var(--color-primary);
+  /* ── Typography ─────────────────────────────────────────── */
+  --font-base:   'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-display:'Georgia', serif;
+  --font-mono:   'Consolas', monospace;
 
-  /* ── Background colours ────────────────────────────────── */
-  --bg-body:              var(--color-grey-50);
-  --bg-card:              var(--color-white);
-  --bg-sidebar:           var(--color-secondary);
-  --bg-sidebar-hover:     var(--color-secondary-light);
-  --bg-header:            var(--color-white);
+  --fs-xs:    11px;
+  --fs-sm:    13px;
+  --fs-base:  16px;
+  --fs-md:    18px;
+  --fs-lg:    20px;
+  --fs-xl:    24px;
+  --fs-2xl:   30px;
+  --fs-3xl:   38px;
+  --fs-4xl:   50px;
+  --fs-5xl:   64px;
+  --fs-hero:  clamp(42px, 6vw, 72px);
 
-  /* ── Border ────────────────────────────────────────────── */
-  --border-color:         var(--color-grey-200);
-  --border-color-focus:   var(--color-primary);
-  --border-radius-sm:     4px;
-  --border-radius:        8px;
-  --border-radius-lg:     12px;
-  --border-radius-xl:     16px;
-  --border-radius-full:   9999px;
+  --fw-normal:   400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+  --fw-black:    900;
 
-  /* ── Spacing scale ─────────────────────────────────────── */
-  --space-1:   4px;
-  --space-2:   8px;
-  --space-3:  12px;
-  --space-4:  16px;
-  --space-5:  20px;
-  --space-6:  24px;
-  --space-8:  32px;
-  --space-10: 40px;
-  --space-12: 48px;
-  --space-16: 64px;
-  --space-20: 80px;
-  --space-24: 96px;
+  --lh-tight:  1.15;
+  --lh-normal: 1.6;
+  --lh-loose:  1.8;
 
-  /* ── Typography ────────────────────────────────────────── */
-  --font-family-base:   'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
-  --font-family-mono:   'Consolas', 'Courier New', monospace;
+  --ls-tight:  -0.03em;
+  --ls-wide:   0.08em;
+  --ls-wider:  0.15em;
+  --ls-caps:   0.12em;
 
-  --font-size-xs:   12px;
-  --font-size-sm:   14px;
-  --font-size-base: 16px;
-  --font-size-lg:   18px;
-  --font-size-xl:   20px;
-  --font-size-2xl:  24px;
-  --font-size-3xl:  30px;
-  --font-size-4xl:  36px;
-  --font-size-5xl:  48px;
+  /* ── Spacing ────────────────────────────────────────────── */
+  --sp-1:   4px;    --sp-2:  8px;   --sp-3:  12px;  --sp-4:  16px;
+  --sp-5:   20px;   --sp-6:  24px;  --sp-8:  32px;  --sp-10: 40px;
+  --sp-12:  48px;   --sp-16: 64px;  --sp-20: 80px;  --sp-24: 96px;
+  --sp-32:  128px;
 
-  --font-weight-normal:   400;
-  --font-weight-medium:   500;
-  --font-weight-semibold: 600;
-  --font-weight-bold:     700;
+  /* Aliases for admin CSS compatibility */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10:40px;
+  --space-12:48px; --space-16:64px; --space-20:80px;
 
-  --line-height-tight:  1.25;
-  --line-height-normal: 1.5;
-  --line-height-loose:  1.75;
+  /* ── Border ─────────────────────────────────────────────── */
+  --radius-sm:   3px;
+  --radius:      6px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   20px;
+  --radius-full: 9999px;
 
-  /* ── Shadows ───────────────────────────────────────────── */
-  --shadow-sm:   0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-md:   0 4px 12px rgba(0, 0, 0, 0.10);
-  --shadow-lg:   0 8px 24px rgba(0, 0, 0, 0.12);
-  --shadow-xl:   0 16px 48px rgba(0, 0, 0, 0.15);
+  /* Alias for admin */
+  --border-radius-sm: 3px; --border-radius: 6px;
+  --border-radius-lg: 12px; --border-radius-xl: 20px;
+  --border-radius-full: 9999px;
 
-  /* ── Transitions ───────────────────────────────────────── */
-  --transition-fast:   150ms ease;
-  --transition-base:   250ms ease;
-  --transition-slow:   400ms ease;
+  /* ── Shadows ────────────────────────────────────────────── */
+  --shadow-sm:  0 1px 4px rgba(0,0,0,0.07);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.10);
+  --shadow-lg:  0 8px 32px rgba(0,0,0,0.14);
+  --shadow-xl:  0 20px 60px rgba(0,0,0,0.18);
+  --shadow-red: 0 4px 20px rgba(204,28,28,0.30);
 
-  /* ── Layout ────────────────────────────────────────────── */
-  --sidebar-width:       260px;
-  --header-height:       64px;
-  --container-max-width: 1280px;
+  /* ── Transitions ────────────────────────────────────────── */
+  --t-fast:   150ms ease;
+  --t-base:   280ms ease;
+  --t-slow:   450ms ease;
+  --transition-fast: 150ms ease;
+  --transition-base: 280ms ease;
+  --transition-slow: 450ms ease;
 
-  /* ── Z-index scale ─────────────────────────────────────── */
-  --z-dropdown:   100;
-  --z-sticky:     200;
-  --z-overlay:    300;
-  --z-modal:      400;
-  --z-toast:      500;
+  /* ── Layout ─────────────────────────────────────────────── */
+  --nav-h:        72px;
+  --container:    1160px;
+  --container-sm: 780px;
+
+  /* ── Z-index ─────────────────────────────────────────────── */
+  --z-dropdown: 100; --z-sticky: 200; --z-overlay: 300;
+  --z-modal: 400;    --z-toast: 500;  --z-whatsapp: 600;
 }

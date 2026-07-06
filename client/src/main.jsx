@@ -1,7 +1,3 @@
-/**
- * main.jsx
- * React application entry point.
- */
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
@@ -12,6 +8,7 @@ import './styles/global.css';
 import './styles/spinner.css';
 import './styles/buttons.css';
 import './styles/navbar.css';
+import './styles/public.css';
 import './styles/admin.css';
 import './styles/responsive.css';
 

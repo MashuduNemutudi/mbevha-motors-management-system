@@ -1,16 +1,6 @@
-/**
- * utils/formatCurrency.js
- * Format a number as South African Rand.
- * e.g. 1500 → "R 1,500.00"
- */
-
 export const formatCurrency = (amount) => {
   const num = parseFloat(amount) || 0;
-  return new Intl.NumberFormat('en-ZA', {
-    style: 'currency',
-    currency: 'ZAR',
-    minimumFractionDigits: 2,
-  }).format(num);
+  return `R ${num.toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 };
 
 export const formatCurrencyRaw = (amount) => {

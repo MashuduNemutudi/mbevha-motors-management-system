@@ -1,14 +1,6 @@
-/**
- * components/common/Spinner.jsx
- * Reusable loading spinner. Size: 'small' | 'medium' | 'large'
- */
-
-const Spinner = ({ size = 'medium', color = 'primary' }) => {
-  return (
-    <div className={`spinner spinner--${size} spinner--${color}`} role="status" aria-label="Loading">
-      <div className="spinner__circle"></div>
-    </div>
-  );
-};
-
+const Spinner = ({ size = 'medium', color = 'primary' }) => (
+  <div className={`spinner spinner--${size}${color === 'white' ? ' spinner--white' : ''}`} role="status" aria-label="Loading">
+    <div className="spinner__circle" />
+  </div>
+);
 export default Spinner;
