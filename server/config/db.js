@@ -35,7 +35,7 @@ const pool = new Pool({
 // Verify connectivity at startup and surface clear errors
 pool.connect((err, client, release) => {
   if (err) {
-    console.error('❌  Database connection failed:', err.message);
+    console.error(err);
     console.error('    Check DATABASE_URL in your .env file.');
     return;
   }

@@ -1,9 +1,19 @@
 /**
  * api/partsApi.js
- * Placeholder — will be implemented in the corresponding phase.
+ * Parts API calls. JWT auto-attached by axios interceptor on admin calls.
  */
 import api from './axios';
 
-// TODO: implement parts API calls
+// Public
+export const getPartsApi    = (params = {}) => api.get('/parts', { params });
+export const getPartApi     = (id)          => api.get(`/parts/${id}`);
 
-export default api;
+// Admin (JWT required)
+export const createPartApi  = (formData)    => api.post('/parts', formData, {
+  headers: { 'Content-Type': 'multipart/form-data' },
+});
+export const updatePartApi  = (id, formData) => api.put(`/parts/${id}`, formData, {
+  headers: { 'Content-Type': 'multipart/form-data' },
+});
+export const togglePartAvailabilityApi = (id) => api.patch(`/parts/${id}/availability`);
+export const deletePartApi  = (id)          => api.delete(`/parts/${id}`);

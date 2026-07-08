@@ -5,56 +5,61 @@ import SectionTitle from '../../components/common/SectionTitle';
 
 const SERVICES = [
   {
-    icon: '🔧', title: 'General Mechanical Repairs',
-    description: 'From misfires and oil leaks to complex fault diagnosis — we repair all makes and models with precision. No job is too big or too small for our experienced team.',
+    icon: '🔧', title: 'Mechanical Repairs',
+    description: 'Comprehensive mechanical repairs for all vehicle makes and models. From minor fixes to complex faults, our technicians handle it all with precision.',
     highlights: ['Engine diagnostics', 'Cooling system repairs', 'Timing belt & chain', 'Oil & fluid leaks'],
   },
   {
     icon: '🛢️', title: 'Vehicle Servicing',
-    description: 'Keep your vehicle running at peak performance with our comprehensive service packages. We follow manufacturer specifications to protect your investment.',
+    description: 'Full vehicle service packages to keep your car running at its best. We follow manufacturer specifications to protect your investment and extend engine life.',
     highlights: ['Full & interim services', 'Oil & filter changes', 'Spark plugs & belts', 'Multi-point inspection'],
   },
   {
-    icon: '🏎️', title: 'BMW Mechanical Repairs',
-    description: 'Deep BMW expertise across all generations — E30 through to modern G-series. We treat your BMW with the specialist attention it deserves, at workshop prices.',
-    highlights: ['All BMW models', 'E30 / E36 / E46 / E90', 'F & G-series', 'VANOS & valve train'],
-  },
-  {
-    icon: '💻', title: 'BMW Diagnostics',
-    description: 'Professional BMW fault code reading, live data analysis, and system diagnostics. We get to the root cause — not just clear the warning light.',
-    highlights: ['OBD fault reading', 'Live data analysis', 'ABS / SRS / DSC', 'Adaptations & coding'],
-  },
-  {
-    icon: '🔄', title: 'Engine Swaps',
-    description: 'Complete engine swap services handled in-house. We source the engine, prepare the vehicle, manage the installation, and ensure everything is tuned correctly before handover.',
-    highlights: ['Engine sourcing', 'Full installation', 'Wiring & ECU', 'Post-swap testing'],
-  },
-  {
-    icon: '⚙️', title: 'Engine Conversions',
-    description: 'Want to run a different engine in your vehicle? Our engine conversion builds are meticulously planned and expertly executed — from mounts and wiring to final tuning.',
-    highlights: ['Conversion planning', 'Custom mounts', 'Wiring harness', 'Dyno-ready setup'],
-  },
-  {
-    icon: '🛑', title: 'Brake Repairs',
-    description: 'Brakes are non-negotiable. We inspect, service, and replace all brake system components to manufacturer specification. Your safety is our priority.',
-    highlights: ['Brake pads & discs', 'Caliper service', 'Brake fluid flush', 'ABS diagnostics'],
+    icon: '💻', title: 'Diagnostics',
+    description: 'Professional vehicle diagnostics using modern equipment. We read fault codes, analyse live data, and identify the root cause before any work begins.',
+    highlights: ['OBD fault code reading', 'Live data analysis', 'ABS / SRS / DSC systems', 'BMW-specific diagnostics'],
   },
   {
     icon: '🚗', title: 'Suspension Repairs',
-    description: "Poor handling, uneven tyre wear, or a harsh ride — our suspension repairs restore your vehicle's ride quality and handling precision.",
-    highlights: ['Shock absorbers', 'Control arms & ball joints', 'Wheel alignment prep', 'Tie rods & bushes'],
+    description: 'Restore ride quality and handling precision with our expert suspension repairs. We inspect and replace worn components to manufacturer specification.',
+    highlights: ['Shock absorbers', 'Control arms & ball joints', 'Tie rods & bushes', 'Wheel bearing replacement'],
   },
   {
-    icon: '🛞', title: 'Used Parts Sales',
-    description: 'Quality tested used parts at competitive prices. We stock a wide range of parts for common vehicles and can source specific items on request.',
-    highlights: ['Tested before sale', 'BMW parts stocked', 'Competitive pricing', 'WhatsApp enquiries'],
+    icon: '🛑', title: 'Brake Repairs',
+    description: 'Brake safety is non-negotiable. We inspect, service, and replace all brake components using quality parts. Your safety is our priority.',
+    highlights: ['Brake pads & discs', 'Caliper service & replacement', 'Brake fluid flush', 'ABS diagnostics'],
+  },
+  {
+    icon: '⚙️', title: 'Engine Repairs',
+    description: 'From head gaskets to full rebuilds, our engine repair work is thorough and reliable. We also specialise in engine swaps and conversions.',
+    highlights: ['Cylinder head jobs', 'Engine overhauls', 'Engine swaps', 'Engine conversions'],
+  },
+  {
+    icon: '🔄', title: 'Gearbox Repairs',
+    description: 'Manual and automatic gearbox repairs, services, and replacements. We have the expertise to diagnose and fix gearbox problems correctly the first time.',
+    highlights: ['Gearbox removal & fitting', 'Gearbox oil service', 'Clutch replacement', 'CV joint service'],
+  },
+  {
+    icon: '🛞', title: 'Used Vehicle Parts',
+    description: 'Quality tested used parts at competitive prices. We stock a wide range of parts and can source specific items on request.',
+    highlights: ['Tested before sale', 'BMW parts in stock', 'Engine & drivetrain parts', 'Suspension & brake parts'],
+  },
+  {
+    icon: '🔨', title: 'Panel Beating',
+    description: "Professional panel beating to restore your vehicle's bodywork to its original shape. We work with precision to eliminate dents, creases, and collision damage.",
+    highlights: ['Collision damage repair', 'Dent removal', 'Panel straightening', 'Rust repairs'],
+  },
+  {
+    icon: '🎨', title: 'Automotive Painting',
+    description: "High-quality automotive painting to match your vehicle's original colour. Our finish work is clean, consistent, and durable.",
+    highlights: ['Full vehicle painting', 'Panel painting', 'Colour matching', 'Primer & clear coat'],
   },
 ];
 
 const ServicesPage = () => {
   const { business } = useBusiness();
-  const waHref    = `https://wa.me/${toWaNumber(business.whatsapp_number)}`;
-  const phoneHref = `tel:${(business.phone || '').replace(/\s/g, '')}`;
+  const waHref       = `https://wa.me/${toWaNumber(business.whatsapp_number)}`;
+  const phoneHref    = `tel:${(business.phone || '').replace(/\s/g, '')}`;
   const phoneDisplay = business.phone || '071 306 5615';
 
   return (
@@ -62,15 +67,17 @@ const ServicesPage = () => {
       <PageBanner
         overline="Our Services"
         title="What We Offer"
-        sub="Professional automotive services for all makes — with specialist expertise in BMW"
+        sub="Professional automotive services — from mechanical repairs to panel beating and painting"
         bgImage="/images/gallery/img-interior-bay.jpg"
       />
 
+      {/* ── Service cards grid ─────────────────────────────── */}
       <section className="section">
         <div className="container">
           <SectionTitle
-            overline="Full Service Workshop" heading="Our Complete Range of Services"
-            sub="Every service is carried out by experienced technicians using quality parts and professional equipment."
+            overline="Full Service Workshop"
+            heading="Our Complete Range of Services"
+            sub="Every job is carried out by experienced technicians using quality parts and professional tools."
             center
           />
           <div className="services-page-grid">
@@ -90,46 +97,48 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      {/* BMW Spotlight */}
+      {/* ── BMW specialist section — informational only ────── */}
       <section className="section section--dark">
         <div className="container">
           <div className="bmw-spotlight">
             <div className="bmw-spotlight__content">
-              <SectionTitle overline="BMW Specialists" heading="Your BMW Deserves a Specialist" light />
-              <p style={{ color: 'var(--clr-grey-400)', lineHeight: '1.8', marginBottom: '32px', fontSize: '15px' }}>
-                We have worked on BMW vehicles across every generation — from classic E30 coupes to modern turbocharged G-series models.
-                Our technicians have hands-on experience with BMW engines, transmissions, electronics, and VANOS systems.
+              <SectionTitle
+                overline="BMW Specialists"
+                heading="Your BMW Deserves a Specialist"
+                light
+              />
+              <p style={{ color: 'var(--clr-grey-400)', lineHeight: '1.8', marginBottom: 20, fontSize: 15 }}>
+                We have worked on BMW vehicles across every generation — from classic E30 coupes to modern
+                turbocharged G-series models. Our technicians have deep hands-on experience with BMW engines,
+                transmissions, electronics, and VANOS systems.
               </p>
-              <p style={{ color: 'var(--clr-grey-400)', lineHeight: '1.8', marginBottom: '40px', fontSize: '15px' }}>
-                When you bring your BMW to {business.business_name || 'Mbevha Motors'}, you get specialist attention at a fraction of the dealership cost — without compromising on quality or accuracy.
+              <p style={{ color: 'var(--clr-grey-400)', lineHeight: '1.8', fontSize: 15 }}>
+                When you bring your BMW to {business.business_name || 'Mbevha Motors'}, you get specialist
+                attention at a fraction of the dealership cost — with no compromise on quality or accuracy.
+                Describe your problem and we'll diagnose it properly before any work begins.
               </p>
-              <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-                <a href={`${waHref}?text=${encodeURIComponent('Hi Mbevha Motors, I need help with my BMW.')}`}
-                   target="_blank" rel="noreferrer" className="btn btn-primary btn-lg">
-                  📲 WhatsApp About Your BMW
-                </a>
-                <a href={phoneHref} className="btn btn-outline-white btn-lg">
-                  📞 {phoneDisplay}
-                </a>
-              </div>
             </div>
             <div className="bmw-spotlight__image">
-              <img src="/images/gallery/img-interior-bay.jpg" alt="BMW in workshop bay" loading="lazy" />
+              <img
+                src="/images/gallery/img-interior-bay.jpg"
+                alt="Workshop bay with BMW"
+                loading="lazy"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Process */}
+      {/* ── How it works ───────────────────────────────────── */}
       <section className="section section--alt">
         <div className="container">
           <SectionTitle overline="The Process" heading="How It Works" center />
           <div className="process-steps">
             {[
-              { step: '01', icon: '📲', title: 'Contact Us',  desc: "Call or WhatsApp us to describe your vehicle issue. We'll advise you on next steps and book you in." },
-              { step: '02', icon: '🔍', title: 'Diagnosis',   desc: 'We inspect and diagnose the problem thoroughly. You receive a clear, honest quotation before we start any work.' },
-              { step: '03', icon: '🔧', title: 'Repair',      desc: 'Our technicians carry out the work using quality parts. We keep you updated throughout the process.' },
-              { step: '04', icon: '✅', title: 'Collection',  desc: 'Your vehicle is road-tested and handed back to you in top condition, with everything explained clearly.' },
+              { step: '01', icon: '📲', title: 'Contact Us', desc: "Call or WhatsApp us to describe your vehicle issue. We'll advise on next steps and book you in." },
+              { step: '02', icon: '🔍', title: 'Diagnosis',  desc: 'We inspect and diagnose thoroughly. You receive a clear, honest quote before we start any work.' },
+              { step: '03', icon: '🔧', title: 'Repair',     desc: 'Our technicians carry out the work using quality parts and keep you updated throughout.' },
+              { step: '04', icon: '✅', title: 'Collection', desc: 'Your vehicle is road-tested and returned to you in top condition, with everything explained.' },
             ].map(s => (
               <div key={s.step} className="process-step">
                 <div className="process-step__number">{s.step}</div>
@@ -142,14 +151,20 @@ const ServicesPage = () => {
         </div>
       </section>
 
+      {/* ── Single CTA at the bottom ────────────────────────── */}
       <section className="cta-banner">
         <div className="container cta-banner__content">
           <h2 className="cta-banner__title">Need a Service or Repair?</h2>
-          <p className="cta-banner__sub">Contact us today for a free diagnostic assessment and honest quote.</p>
+          <p className="cta-banner__sub">
+            Contact us for an honest assessment and fair quote. No hidden charges.
+          </p>
           <div className="cta-banner__actions">
             <a href={phoneHref} className="btn btn-outline-white btn-lg">📞 {phoneDisplay}</a>
-            <a href={`${waHref}?text=${encodeURIComponent('Hi Mbevha Motors, I need a quote for my vehicle.')}`}
-               target="_blank" rel="noreferrer" className="btn btn-whatsapp btn-lg">
+            <a
+              href={`${waHref}?text=${encodeURIComponent('Hi Mbevha Motors, I need a quote for my vehicle.')}`}
+              target="_blank" rel="noreferrer"
+              className="btn btn-whatsapp btn-lg"
+            >
               📲 Get a Quote
             </a>
           </div>
