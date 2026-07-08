@@ -1,19 +1,23 @@
 import { useState } from 'react';
-
-const WA = '27713065615';
+import { useBusiness, toWaNumber } from '../../context/BusinessContext';
 
 const WhatsAppFloatingButton = () => {
+  const { business } = useBusiness();
   const [hover, setHover] = useState(false);
+
+  const waHref = `https://wa.me/${toWaNumber(business.whatsapp_number)}?text=${
+    encodeURIComponent(
+      `Hi ${business.business_name || 'Mbevha Motors'}, I would like to enquire about your services.`
+    )
+  }`;
 
   return (
     <div className="whatsapp-float">
       {hover && (
-        <div className="whatsapp-float__bubble">
-          Chat with us on WhatsApp 👋
-        </div>
+        <div className="whatsapp-float__bubble">Chat with us on WhatsApp 👋</div>
       )}
       <a
-        href={`https://wa.me/${WA}?text=Hi%20Mbevha%20Motors,%20I%20would%20like%20to%20enquire%20about%20your%20services.`}
+        href={waHref}
         target="_blank" rel="noreferrer"
         className="whatsapp-float__btn"
         onMouseEnter={() => setHover(true)}

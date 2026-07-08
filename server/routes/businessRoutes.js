@@ -1,30 +1,18 @@
 /**
  * routes/businessRoutes.js
- * Mounted at /api/business
+ * Mounted at /api/business in server.js
  *
- * Endpoints:
- *   GET /api/business   — get business info (public)
- *   PUT /api/business   — update business info (admin only)
- *
- * TODO (Phase 9): Implement both routes.
+ * GET /api/business  — public (no auth) — fetched by public website
+ * PUT /api/business  — protected (JWT)  — updated by admin dashboard
  */
 
 const express = require('express');
-const router = express.Router();
+const router  = express.Router();
+
 const { protect } = require('../middleware/authMiddleware');
+const { getBusinessInfo, updateBusinessInfo } = require('../controllers/businessController');
 
-router.get('/',  (req, res) => res.json({ success: true, data: {
-  business_name: 'Mbevha Motors (Pty) Ltd',
-  motto: 'Your Trusted Automotive Partner in Limpopo',
-  phone: '',
-  email: '',
-  address: '',
-  about: '',
-  opening_hours: '',
-  whatsapp_number: '',
-  google_maps_link: '',
-}, message: 'Business info — coming in Phase 9' }));
-
-router.put('/',  protect, (req, res) => res.json({ success: true, message: 'Update business info — coming in Phase 9' }));
+router.get('/', getBusinessInfo);
+router.put('/', protect, updateBusinessInfo);
 
 module.exports = router;

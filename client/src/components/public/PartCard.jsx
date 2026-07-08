@@ -1,11 +1,13 @@
+import { useBusiness, toWaNumber } from '../../context/BusinessContext';
 import { formatCurrency } from '../../utils/formatCurrency';
 
-const WA = '27713065615';
-
 const PartCard = ({ part }) => {
-  const waMsg = encodeURIComponent(
-    `Hi Mbevha Motors, I'm interested in the ${part.name} (${part.brand}) — R${part.price}. Is it still available?`
-  );
+  const { business } = useBusiness();
+  const waHref = `https://wa.me/${toWaNumber(business.whatsapp_number)}?text=${
+    encodeURIComponent(
+      `Hi ${business.business_name || 'Mbevha Motors'}, I'm interested in the ${part.name} — R${part.price}. Is it still available?`
+    )
+  }`;
 
   return (
     <div className="part-card">
@@ -31,10 +33,12 @@ const PartCard = ({ part }) => {
         <h3 className="part-card__name">{part.name}</h3>
 
         <div className="part-card__meta">
-          <div className="part-card__meta-row">
-            <span className="part-card__meta-label">Vehicle Brand</span>
-            <span className="part-card__meta-value">{part.brand}</span>
-          </div>
+          {part.brand && (
+            <div className="part-card__meta-row">
+              <span className="part-card__meta-label">Brand</span>
+              <span className="part-card__meta-value">{part.brand}</span>
+            </div>
+          )}
           <div className="part-card__meta-row">
             <span className="part-card__meta-label">Condition</span>
             <span className="part-card__meta-value">{part.condition}</span>
@@ -46,10 +50,11 @@ const PartCard = ({ part }) => {
         </div>
 
         <a
-          href={`https://wa.me/${WA}?text=${waMsg}`}
+          href={waHref}
           target="_blank" rel="noreferrer"
           className={`btn btn-whatsapp btn-full btn-sm${!part.available ? ' disabled' : ''}`}
           onClick={e => { if (!part.available) e.preventDefault(); }}
+          style={{ opacity: part.available ? 1 : 0.5, pointerEvents: part.available ? 'auto' : 'none' }}
         >
           📲 Enquire on WhatsApp
         </a>
