@@ -1,37 +1,41 @@
 /**
  * components/admin/Sidebar.jsx
- * ─────────────────────────────────────────────────────────────
- * Admin dashboard sidebar navigation.
- *
- * Features (Phase 2):
- *   - Mbevha Motors branding at top
- *   - Navigation links with icons:
- *     Dashboard, Quotations, Invoices, Parts,
- *     Gallery, Messages (with unread badge),
- *     Business Info, Settings
- *   - Active link highlight
- *   - Logout button at bottom
- *   - Collapsible on mobile
- *
- * TODO (Phase 2): Add icons, unread badge, mobile collapse.
+ * Admin sidebar with unread messages badge on Messages link.
  */
 
-import { NavLink } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
-
-const NAV_ITEMS = [
-  { to: '/admin/dashboard',      label: 'Dashboard'         },
-  { to: '/admin/quotations',     label: 'Quotations'        },
-  { to: '/admin/invoices',       label: 'Invoices'          },
-  { to: '/admin/parts',          label: 'Parts'             },
-  { to: '/admin/gallery',        label: 'Gallery'           },
-  { to: '/admin/messages',       label: 'Messages'          },
-  { to: '/admin/business-info',  label: 'Business Info'     },
-  { to: '/admin/settings',       label: 'Settings'          },
-];
+import { useEffect, useState } from 'react';
+import { NavLink }  from 'react-router-dom';
+import useAuth      from '../../hooks/useAuth';
+import { getMessageStatsApi } from '../../api/messagesApi';
 
 const Sidebar = () => {
   const { admin, logout } = useAuth();
+  const [unread, setUnread] = useState(0);
+
+  /* Poll for unread count every 60s */
+  useEffect(() => {
+    const fetchUnread = async () => {
+      try {
+        const res = await getMessageStatsApi();
+        setUnread(res.data?.data?.unread || 0);
+      } catch { /* non-fatal */ }
+    };
+
+    fetchUnread();
+    const interval = setInterval(fetchUnread, 60_000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const NAV_ITEMS = [
+    { to: '/admin/dashboard',     label: 'Dashboard'     },
+    { to: '/admin/quotations',    label: 'Quotations'    },
+    { to: '/admin/invoices',      label: 'Invoices'      },
+    { to: '/admin/parts',         label: 'Parts'         },
+    { to: '/admin/gallery',       label: 'Gallery'       },
+    { to: '/admin/messages',      label: 'Messages', badge: unread },
+    { to: '/admin/business-info', label: 'Business Info' },
+    { to: '/admin/settings',      label: 'Settings'      },
+  ];
 
   return (
     <aside className="sidebar">
@@ -41,7 +45,7 @@ const Sidebar = () => {
       </div>
 
       <nav className="sidebar__nav">
-        {NAV_ITEMS.map((item) => (
+        {NAV_ITEMS.map(item => (
           <NavLink
             key={item.to}
             to={item.to}
@@ -49,7 +53,10 @@ const Sidebar = () => {
               `sidebar__link${isActive ? ' sidebar__link--active' : ''}`
             }
           >
-            {item.label}
+            <span>{item.label}</span>
+            {item.badge > 0 && (
+              <span className="sidebar__badge">{item.badge}</span>
+            )}
           </NavLink>
         ))}
       </nav>

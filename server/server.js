@@ -25,7 +25,8 @@ const invoiceRoutes   = require('./routes/invoicesRoutes');
 const partRoutes      = require('./routes/partsRoutes');
 const galleryRoutes   = require('./routes/galleryRoutes');
 const messageRoutes   = require('./routes/messagesRoutes');
-const businessRoutes  = require('./routes/businessRoutes');
+const businessRoutes   = require('./routes/businessRoutes');
+const dashboardRoutes  = require('./routes/dashboardRoutes');
 
 // ── App initialisation ───────────────────────────────────────
 const app = express();
@@ -91,6 +92,7 @@ app.use('/api/parts',      partRoutes);
 app.use('/api/gallery',    galleryRoutes);
 app.use('/api/messages',   messageRoutes);
 app.use('/api/business',   businessRoutes);
+app.use('/api/dashboard',  dashboardRoutes);
 
 // ── 404 handler ──────────────────────────────────────────────
 // Catches any request that did not match a defined route.
