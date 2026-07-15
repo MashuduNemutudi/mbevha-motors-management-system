@@ -1,23 +1,25 @@
 # Database Migrations
 
-This folder tracks incremental schema changes after the initial deployment.
-
-## Convention
-
-Each migration file is numbered sequentially:
-- `001_initial_schema.sql` — baseline schema at launch
-- `002_<description>.sql`  — next change
-- `003_<description>.sql`  — and so on
-
-## How to run a migration
+## Run order
 
 ```bash
-psql <your_neon_connection_string> -f migrations/002_your_change.sql
+# 1. Initial schema (run once when setting up)
+psql "postgresql://..." -f database/migrations/001_initial_schema.sql
+
+# 2. Full upgrade — adds all new columns required by the application
+psql "postgresql://..." -f database/migrations/002_upgrade_schema.sql
 ```
 
-## Current migrations
+Both migrations are **idempotent** — safe to run multiple times.
 
-| # | File | Description | Date |
-|---|------|-------------|------|
-| 001 | 001_initial_schema.sql | Initial schema (all core tables) | 2026-06 |
-| 002 | 002_messages_email_subject.sql | Add email and subject columns to messages | 2026-07 |
+If your database already has the base tables (from 001), run **002 only**.
+
+## What 002 adds
+
+| Table | What was added |
+|-------|---------------|
+| `messages` | `email`, `subject` |
+| `quotations` | `customer_address`, `vehicle_colour`, `vehicle_vin`, `mileage`, `expiry_date`, `prepared_by`, `discount`, `vat_amount`; status constraint expanded to 5 values |
+| `quotation_items` | `sort_order` |
+| `invoices` | `customer_address`, `vehicle_make`, `vehicle_model`, `vehicle_colour`, `vehicle_vin`, `mileage`, `prepared_by`, `discount`, `vat_amount`, `payment_method`, `reference_number`, `invoice_date`; payment_status expanded to 3 values |
+| `invoice_items` | `sort_order` |

@@ -92,7 +92,6 @@ app.use('/api/parts',      partRoutes);
 app.use('/api/gallery',    galleryRoutes);
 app.use('/api/messages',   messageRoutes);
 app.use('/api/business',   businessRoutes);
-app.use('/api/dashboard',  dashboardRoutes);
 
 // ── 404 handler ──────────────────────────────────────────────
 // Catches any request that did not match a defined route.

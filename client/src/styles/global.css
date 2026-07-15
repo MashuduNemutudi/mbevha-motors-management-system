@@ -140,3 +140,18 @@ h1,h2,h3,h4,h5,h6 { line-height: var(--lh-tight); font-weight: var(--fw-bold); }
 /* ── Not found ───────────────────────────────────────────── */
 .not-found-page { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; text-align:center; padding:var(--sp-8); gap:var(--sp-4); }
 .not-found-page h1 { font-size:var(--fs-5xl); color:var(--clr-red); }
+
+/* ── Form validation error text ─────────────────────────── */
+.form-error {
+  display: block;
+  font-size: 11px;
+  color: var(--clr-red, #CC1C1C);
+  margin-top: 4px;
+  font-weight: 600;
+}
+.form-group input[aria-invalid="true"],
+.form-group textarea[aria-invalid="true"],
+.form-group select[aria-invalid="true"] {
+  border-color: var(--clr-red, #CC1C1C);
+  box-shadow: 0 0 0 2px rgba(204,28,28,0.12);
+}

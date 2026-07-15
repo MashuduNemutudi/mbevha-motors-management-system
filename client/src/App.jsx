@@ -1,8 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 // Layouts
-import PublicLayout  from './components/public/PublicLayout';
-import AdminLayout   from './components/admin/AdminLayout';
+import PublicLayout   from './components/public/PublicLayout';
+import AdminLayout    from './components/admin/AdminLayout';
 import ProtectedRoute from './components/common/ProtectedRoute';
 
 // Public pages
@@ -30,26 +30,29 @@ const NotFoundPage = () => (
   <div className="not-found-page">
     <h1>404</h1>
     <h2>Page Not Found</h2>
-    <a href="/" className="btn btn-primary" style={{ marginTop: 16 }}>← Back to Home</a>
+    <p style={{ color: 'var(--text-muted)', marginBottom: 24 }}>
+      The page you are looking for does not exist.
+    </p>
+    <a href="/" className="btn btn-primary">← Back to Home</a>
   </div>
 );
 
 const App = () => (
   <Routes>
-    {/* Public website */}
+    {/* ── Public website ────────────────────────────────── */}
     <Route element={<PublicLayout />}>
-      <Route path="/"         element={<HomePage />}     />
-      <Route path="/about"    element={<AboutPage />}    />
-      <Route path="/services" element={<ServicesPage />} />
-      <Route path="/parts"    element={<PartsPage />}    />
-      <Route path="/gallery"  element={<GalleryPage />}  />
-      <Route path="/contact"  element={<ContactPage />}  />
+      <Route index element={<HomePage />} />         {/* "/" */}
+      <Route path="about"    element={<AboutPage />}    />
+      <Route path="services" element={<ServicesPage />} />
+      <Route path="parts"    element={<PartsPage />}    />
+      <Route path="gallery"  element={<GalleryPage />}  />
+      <Route path="contact"  element={<ContactPage />}  />
     </Route>
 
-    {/* Admin login (public) */}
+    {/* ── Admin login (public, no sidebar) ─────────────── */}
     <Route path="/admin/login" element={<LoginPage />} />
 
-    {/* Admin dashboard (protected) */}
+    {/* ── Admin dashboard (protected) ──────────────────── */}
     <Route
       path="/admin"
       element={
@@ -58,21 +61,24 @@ const App = () => (
         </ProtectedRoute>
       }
     >
-      <Route index element={<Navigate to="dashboard" replace />} />
-      <Route path="dashboard"             element={<DashboardPage />}     />
-      <Route path="quotations"            element={<QuotationsPage />}    />
-      <Route path="quotations/new"        element={<QuotationFormPage />} />
-      <Route path="quotations/:id/edit"   element={<QuotationFormPage />} />
-      <Route path="invoices"              element={<InvoicesPage />}      />
-      <Route path="invoices/new"          element={<InvoiceFormPage />}   />
-      <Route path="invoices/:id/edit"     element={<InvoiceFormPage />}   />
-      <Route path="parts"                 element={<PartsAdminPage />}    />
-      <Route path="gallery"               element={<GalleryAdminPage />}  />
-      <Route path="messages"              element={<MessagesPage />}      />
-      <Route path="business-info"         element={<BusinessInfoPage />}  />
-      <Route path="settings"              element={<SettingsPage />}      />
+      {/* /admin and /admin/ both redirect to /admin/dashboard */}
+      <Route index element={<Navigate to="/admin/dashboard" replace />} />
+
+      <Route path="dashboard"           element={<DashboardPage />}     />
+      <Route path="quotations"          element={<QuotationsPage />}    />
+      <Route path="quotations/new"      element={<QuotationFormPage />} />
+      <Route path="quotations/:id/edit" element={<QuotationFormPage />} />
+      <Route path="invoices"            element={<InvoicesPage />}      />
+      <Route path="invoices/new"        element={<InvoiceFormPage />}   />
+      <Route path="invoices/:id/edit"   element={<InvoiceFormPage />}   />
+      <Route path="parts"               element={<PartsAdminPage />}    />
+      <Route path="gallery"             element={<GalleryAdminPage />}  />
+      <Route path="messages"            element={<MessagesPage />}      />
+      <Route path="business-info"       element={<BusinessInfoPage />}  />
+      <Route path="settings"            element={<SettingsPage />}      />
     </Route>
 
+    {/* ── Catch-all 404 ─────────────────────────────────── */}
     <Route path="*" element={<NotFoundPage />} />
   </Routes>
 );

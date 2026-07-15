@@ -105,4 +105,47 @@ const getMe = async (req, res, next) => {
   }
 };
 
-module.exports = { login, getMe };
+
+/**
+ * PUT /api/auth/change-password
+ * Body: { currentPassword, newPassword }
+ * Requires: Authorization: Bearer <token>
+ */
+const changePassword = async (req, res, next) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword)
+      return res.status(400).json({ success: false, message: 'Both current and new password are required.' });
+
+    if (newPassword.length < 8)
+      return res.status(400).json({ success: false, message: 'New password must be at least 8 characters.' });
+
+    if (currentPassword === newPassword)
+      return res.status(400).json({ success: false, message: 'New password must be different from current password.' });
+
+    const { rows } = await db.query(
+      'SELECT id, password_hash FROM admins WHERE id = $1',
+      [req.admin.id]
+    );
+    if (!rows.length)
+      return res.status(404).json({ success: false, message: 'Account not found.' });
+
+    const match = await bcrypt.compare(currentPassword, rows[0].password_hash);
+    if (!match)
+      return res.status(401).json({ success: false, message: 'Current password is incorrect.' });
+
+    const newHash = await bcrypt.hash(newPassword, 12);
+    await db.query(
+      'UPDATE admins SET password_hash = $1 WHERE id = $2',
+      [newHash, req.admin.id]
+    );
+
+    res.status(200).json({ success: true, message: 'Password changed successfully. Please log in again.' });
+  } catch (err) {
+    next(err);
+  }
+};
+
+// Re-export with the new function
+module.exports = { login, getMe, changePassword };
