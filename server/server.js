@@ -9,6 +9,11 @@
 // Load environment variables FIRST before any other imports
 require('dotenv').config();
 
+// TEMPORARY - Debug Render environment variables
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("PORT:", process.env.PORT);
+console.log("CLIENT_URL:", process.env.CLIENT_URL);
+
 const express = require('express');
 const cors    = require('cors');
 const helmet  = require('helmet');
