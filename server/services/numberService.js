@@ -68,4 +68,30 @@ const nextInvoiceNumber = async () => {
   return `${prefix}${String(sequence).padStart(4, '0')}`;
 };
 
-module.exports = { nextQuotationNumber, nextInvoiceNumber };
+
+/**
+ * Generate the next job card number for the current year.
+ * @returns {Promise<string>} e.g. "JC-2026-0001"
+ */
+const nextJobCardNumber = async () => {
+  const year   = new Date().getFullYear();
+  const prefix = `JC-${year}-`;
+
+  const { rows } = await db.query(
+    `SELECT job_card_number FROM job_cards
+     WHERE  job_card_number LIKE $1
+     ORDER  BY job_card_number DESC
+     LIMIT  1`,
+    [`${prefix}%`]
+  );
+
+  let sequence = 1;
+  if (rows.length > 0) {
+    const lastSeq = parseInt(rows[0].job_card_number.split('-')[2], 10);
+    if (!isNaN(lastSeq)) sequence = lastSeq + 1;
+  }
+  return `${prefix}${String(sequence).padStart(4, '0')}`;
+};
+
+// Re-export including new function
+module.exports = { nextQuotationNumber, nextInvoiceNumber, nextJobCardNumber };

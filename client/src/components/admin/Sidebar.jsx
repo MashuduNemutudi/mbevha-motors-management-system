@@ -32,6 +32,7 @@ const Sidebar = () => {
     { to: '/admin/invoices',      label: '🧾  Invoices'      },
     { to: '/admin/parts',         label: '🔧  Parts'         },
     { to: '/admin/gallery',       label: '🖼️   Gallery'       },
+    { to: '/admin/job-cards',     label: '🔖  Job Cards'    },
     { to: '/admin/messages',      label: '✉️   Messages', badge: unread },
     { to: '/admin/business-info', label: '🏢  Business Info' },
     { to: '/admin/settings',      label: '⚙️   Settings'      },

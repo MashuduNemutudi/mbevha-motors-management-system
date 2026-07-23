@@ -55,8 +55,16 @@ export const BusinessProvider = ({ children }) => {
     try {
       const res = await getBusinessInfo();
       if (res.data?.success && res.data?.data) {
-        // Merge with fallback so any null DB fields have a safe value
-        setBusiness({ ...FALLBACK, ...res.data.data });
+        // Merge with fallback — null/undefined DB values must NOT
+        // overwrite fallback strings (null.split() would crash the app)
+        const data = res.data.data;
+        const safe = { ...FALLBACK };
+        Object.keys(data).forEach(key => {
+          if (data[key] !== null && data[key] !== undefined && data[key] !== '') {
+            safe[key] = data[key];
+          }
+        });
+        setBusiness(safe);
       }
     } catch {
       // Non-fatal: public website works with fallback values

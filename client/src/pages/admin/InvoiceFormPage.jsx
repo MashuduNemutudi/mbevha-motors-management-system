@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { getInvoiceApi, createInvoiceApi, updateInvoiceApi, getInvoicePdfUrl } from '../../api/invoicesApi';
+import { getInvoiceApi, createInvoiceApi, updateInvoiceApi, getInvoicePdfApi } from '../../api/invoicesApi';
 import Spinner from '../../components/common/Spinner';
 import { formatCurrency } from '../../utils/formatCurrency';
 
@@ -96,10 +96,16 @@ const InvoiceFormPage = () => {
     finally { setSaving(false); }
   };
 
-  const openPdf = () => {
-    const token = localStorage.getItem('mmms_token');
-    fetch(getInvoicePdfUrl(id), { headers: { Authorization: `Bearer ${token}` } })
-      .then(r => r.blob()).then(blob => window.open(URL.createObjectURL(blob), '_blank'));
+  const openPdf = async () => {
+    try {
+      const res = await getInvoicePdfApi(id);
+      const blobUrl = URL.createObjectURL(new Blob([res.data], { type: 'application/pdf' }));
+      const a = document.createElement('a');
+      a.href = blobUrl; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      document.body.appendChild(a); a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
+    } catch { setError('Failed to generate PDF.'); }
   };
 
   if (loading) return <div className="page"><div style={{ display: 'flex', justifyContent: 'center', padding: 80 }}><Spinner size="large" /></div></div>;

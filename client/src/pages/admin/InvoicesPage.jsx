@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { getInvoicesApi, deleteInvoiceApi, updatePaymentApi, getInvoicePdfUrl } from '../../api/invoicesApi';
+import { getInvoicesApi, deleteInvoiceApi, updatePaymentApi, getInvoicePdfApi } from '../../api/invoicesApi';
 import ConfirmDialog  from '../../components/common/ConfirmDialog';
 import Spinner        from '../../components/common/Spinner';
 import { formatDate } from '../../utils/formatDate';
@@ -45,11 +45,24 @@ const InvoicesPage = () => {
     finally { setPayTarget(null); }
   };
 
-  const openPdf = (id) => {
-    const token = localStorage.getItem('mmms_token');
-    fetch(getInvoicePdfUrl(id), { headers: { Authorization: `Bearer ${token}` } })
-      .then(r => r.blob())
-      .then(blob => window.open(URL.createObjectURL(blob), '_blank'));
+  const [pdfLoading, setPdfLoading] = useState(null);
+
+  const openPdf = async (id) => {
+    setPdfLoading(id);
+    try {
+      const res    = await getInvoicePdfApi(id);
+      const blobUrl = URL.createObjectURL(new Blob([res.data], { type: 'application/pdf' }));
+      const a = document.createElement('a');
+      a.href = blobUrl; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
+    } catch {
+      alert('Failed to generate PDF. Please try again.');
+    } finally {
+      setPdfLoading(null);
+    }
   };
 
   return (
@@ -124,7 +137,7 @@ const InvoicesPage = () => {
                   <td style={{ fontSize: 12, color: 'var(--text-muted)' }}>{formatDate(inv.invoice_date || inv.created_at)}</td>
                   <td>
                     <div style={{ display: 'flex', gap: 4, justifyContent: 'flex-end', flexWrap: 'wrap' }}>
-                      <button className="btn btn-ghost btn-sm" onClick={() => openPdf(inv.id)}>📄 PDF</button>
+                      <button className="btn btn-ghost btn-sm" onClick={() => openPdf(inv.id)} disabled={pdfLoading === inv.id}>{pdfLoading === inv.id ? '…' : '📄 PDF'}</button>
                       <Link to={`/admin/invoices/${inv.id}/edit`} className="btn btn-ghost btn-sm">Edit</Link>
                       {inv.payment_status !== 'paid' && (
                         <button className="btn btn-sm" style={{ background: '#27ae60', color: '#fff', border: 'none' }}

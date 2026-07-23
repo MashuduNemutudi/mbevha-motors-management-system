@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   getQuotationsApi, deleteQuotationApi, duplicateQuotationApi,
-  updateStatusApi, convertToInvoiceApi, getQuotationPdfUrl,
+  updateStatusApi, convertToInvoiceApi, getQuotationPdfApi,
 } from '../../api/quotationsApi';
 import ConfirmDialog  from '../../components/common/ConfirmDialog';
 import Spinner        from '../../components/common/Spinner';
@@ -73,13 +73,24 @@ const QuotationsPage = () => {
     } finally { setWorking(null); }
   };
 
-  const openPdf = (id) => {
-    const url = getQuotationPdfUrl(id);
-    const token = localStorage.getItem('mmms_token');
-    // Open PDF with auth header via fetch + blob URL
-    fetch(url, { headers: { Authorization: `Bearer ${token}` } })
-      .then(r => r.blob())
-      .then(blob => window.open(URL.createObjectURL(blob), '_blank'));
+  const [pdfLoading, setPdfLoading] = useState(null);
+
+  const openPdf = async (id) => {
+    setPdfLoading(id);
+    try {
+      const res    = await getQuotationPdfApi(id);
+      const blobUrl = URL.createObjectURL(new Blob([res.data], { type: 'application/pdf' }));
+      const a = document.createElement('a');
+      a.href = blobUrl; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
+    } catch {
+      alert('Failed to generate PDF. Please try again.');
+    } finally {
+      setPdfLoading(null);
+    }
   };
 
   const STATUSES = ['all','draft','sent','approved','rejected','converted'];
@@ -154,7 +165,7 @@ const QuotationsPage = () => {
                   <td style={{ fontSize: 12, color: 'var(--text-muted)' }}>{formatDate(q.created_at)}</td>
                   <td>
                     <div style={{ display: 'flex', gap: 4, justifyContent: 'flex-end', flexWrap: 'wrap' }}>
-                      <button className="btn btn-ghost btn-sm" onClick={() => openPdf(q.id)} title="View PDF">📄 PDF</button>
+                      <button className="btn btn-ghost btn-sm" onClick={() => openPdf(q.id)} disabled={pdfLoading === q.id} title="View PDF">{pdfLoading === q.id ? '…' : '📄 PDF'}</button>
                       <Link to={`/admin/quotations/${q.id}/edit`} className="btn btn-ghost btn-sm">Edit</Link>
                       <button className="btn btn-ghost btn-sm" onClick={() => handleDuplicate(q)} title="Duplicate">Copy</button>
                       {q.status === 'approved' && (

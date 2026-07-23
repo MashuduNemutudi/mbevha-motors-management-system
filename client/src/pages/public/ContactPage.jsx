@@ -19,8 +19,8 @@ const SUBJECTS = [
   'Other',
 ];
 
-const parseHours = (raw = '') =>
-  raw.split('|').map(seg => {
+const parseHours = (raw) =>
+  (raw || '').split('|').map(seg => {
     const s = seg.trim();
     const i = s.indexOf(':');
     if (i === -1) return { day: s, time: 'Closed' };
@@ -136,7 +136,7 @@ const ContactPage = () => {
                     <div className="contact-info-item__label">Address</div>
                     <div className="contact-info-item__value">
                       {business.address
-                        ? business.address.split(',').map((l, i) => (
+                        ? (business.address || '').split(',').map((l, i) => (
                             <span key={i} style={{ display: 'block' }}>{l.trim()}</span>
                           ))
                         : <>Dzwerani, Mahematshena<br />Vuwani Road<br />Opposite Mavikos</>

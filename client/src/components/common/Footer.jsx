@@ -3,8 +3,8 @@ import { useBusiness, toWaNumber } from '../../context/BusinessContext';
 
 /* Parse "Mon–Fri: 07:30–17:00 | Sat: 08:00–13:00 | Sun: Closed"
    into an array of { day, time } objects for display */
-const parseHours = (raw = '') =>
-  raw.split('|').map(seg => {
+const parseHours = (raw) =>
+  (raw || '').split('|').map(seg => {
     const trimmed = seg.trim();
     const colon   = trimmed.indexOf(':');
     if (colon === -1) return { day: trimmed, time: 'Closed' };
@@ -96,7 +96,7 @@ const Footer = () => {
                 <span className="footer__contact-icon">📍</span>
                 <div className="footer__contact-text">
                   <strong>Address</strong>
-                  {business.address.split(',').map((line, i) => (
+                  {(business.address || '').split(',').map((line, i) => (
                     <span key={i} style={{ display: 'block' }}>{line.trim()}</span>
                   ))}
                 </div>

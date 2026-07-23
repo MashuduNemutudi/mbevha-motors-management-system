@@ -25,6 +25,8 @@ import GalleryAdminPage  from './pages/admin/GalleryAdminPage';
 import MessagesPage      from './pages/admin/MessagesPage';
 import BusinessInfoPage  from './pages/admin/BusinessInfoPage';
 import SettingsPage      from './pages/admin/SettingsPage';
+import JobCardsPage      from './pages/admin/JobCardsPage';
+import JobCardFormPage   from './pages/admin/JobCardFormPage';
 
 const NotFoundPage = () => (
   <div className="not-found-page">
@@ -76,6 +78,9 @@ const App = () => (
       <Route path="messages"            element={<MessagesPage />}      />
       <Route path="business-info"       element={<BusinessInfoPage />}  />
       <Route path="settings"            element={<SettingsPage />}      />
+      <Route path="job-cards"           element={<JobCardsPage />}      />
+      <Route path="job-cards/new"       element={<JobCardFormPage />}   />
+      <Route path="job-cards/:id/edit"  element={<JobCardFormPage />}   />
     </Route>
 
     {/* ── Catch-all 404 ─────────────────────────────────── */}

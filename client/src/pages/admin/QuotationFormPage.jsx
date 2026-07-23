@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import {
   getQuotationApi, createQuotationApi, updateQuotationApi,
-  getQuotationPdfUrl, updateStatusApi,
+  getQuotationPdfApi, updateStatusApi,
 } from '../../api/quotationsApi';
 import Spinner from '../../components/common/Spinner';
 import { formatCurrency } from '../../utils/formatCurrency';
@@ -116,11 +116,16 @@ const QuotationFormPage = () => {
     } finally { setSaving(false); }
   };
 
-  const openPdf = () => {
-    const token = localStorage.getItem('mmms_token');
-    fetch(getQuotationPdfUrl(id), { headers: { Authorization: `Bearer ${token}` } })
-      .then(r => r.blob())
-      .then(blob => window.open(URL.createObjectURL(blob), '_blank'));
+  const openPdf = async () => {
+    try {
+      const res = await getQuotationPdfApi(id);
+      const blobUrl = URL.createObjectURL(new Blob([res.data], { type: 'application/pdf' }));
+      const a = document.createElement('a');
+      a.href = blobUrl; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      document.body.appendChild(a); a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
+    } catch { setError('Failed to generate PDF.'); }
   };
 
   if (loading) return (

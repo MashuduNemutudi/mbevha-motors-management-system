@@ -108,16 +108,19 @@ const DashboardPage = () => {
   useEffect(() => {
     (async () => {
       try {
+        // Fetch all three independently — one failure won't block the others
+        const safe = async (fn) => { try { return await fn(); } catch { return null; } };
         const [s, a, c] = await Promise.all([
-          getDashboardStatsApi(),
-          getDashboardActivityApi(12),
-          getDashboardChartsApi(),
+          safe(getDashboardStatsApi),
+          safe(() => getDashboardActivityApi(12)),
+          safe(getDashboardChartsApi),
         ]);
-        setStats(s.data.data);
-        setActivity(a.data.data || []);
-        setCharts(c.data.data);
+        if (s?.data?.data)  setStats(s.data.data);
+        if (a?.data?.data)  setActivity(a.data.data || []);
+        if (c?.data?.data)  setCharts(c.data.data);
+        if (!s && !a && !c) setError('Dashboard data unavailable. Check server connection.');
       } catch {
-        setError('Failed to load dashboard data.');
+        setError('Failed to connect to server.');
       } finally {
         setLoading(false);
       }
